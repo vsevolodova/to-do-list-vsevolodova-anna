@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Личный список задач с дедлайнами, статусами, важностью, комментариями и вложениями.">
+  <meta name="color-scheme" content="light">
+  <title>To-Do List VSEVOLODOVA ANNA</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-logo" viewBox="0 0 24 24">
+      <path d="M9 6h11M9 12h11M9 18h11"/>
+      <path d="m3 6 1.5 1.5L7 5M3 12l1.5 1.5L7 11M3 18l1.5 1.5L7 17"/>
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8.2V19l-4 2v-7.8L3 5Z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24">
+      <path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>
+    </symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24">
+      <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/>
+      <path d="M1 14h6M9 8h6M17 16h6"/>
+    </symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24">
+      <path d="M12 22c4.1 0 7-2.8 7-6.6 0-2.4-1.2-4.4-3.3-6.3-.5 1.6-1.4 2.6-2.5 3.1.2-2.9-1.1-5.9-3.5-7.5.1 2.6-.8 4.2-2.1 5.6C6.7 12 6 13.8 6 15.6 6 19.4 8.6 22 12 22Z"/>
+    </symbol>
+    <symbol id="i-comment" viewBox="0 0 24 24">
+      <path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.6 8.6 0 0 1-3.9-.9L3 21l1.9-5.6a8.6 8.6 0 0 1-.9-3.9A8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5Z"/>
+    </symbol>
+    <symbol id="i-paperclip" viewBox="0 0 24 24">
+      <path d="m21 11.5-8.5 8.5a5 5 0 0 1-7-7L14 4.5a3.5 3.5 0 0 1 5 5L10.5 18a2 2 0 0 1-3-3L15 7.5"/>
+    </symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24">
+      <path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+    </symbol>
+    <symbol id="i-dots" viewBox="0 0 24 24">
+      <circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+      <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+      <circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/>
+    </symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
+    <symbol id="i-restore" viewBox="0 0 24 24">
+      <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>
+      <path d="M12 9v4M12 17h.01"/>
+    </symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24">
+      <path d="M4 5h16l2 9v5H2v-5l2-9Z"/><path d="M2 14h5l2 3h6l2-3h5"/>
+    </symbol>
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/>
+    </symbol>
+    <symbol id="i-image" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+      <path d="m21 15-5-5L5 21"/>
+    </symbol>
+  </svg>
+
+  <div class="app">
+    <div id="storage-banner" class="storage-banner" role="alert" hidden>
+      <svg class="icon" aria-hidden="true"><use href="#i-alert"></use></svg>
+      <span id="storage-banner-text"></span>
+    </div>
+
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg class="icon"><use href="#i-logo"></use></svg>
+        </span>
+        <div>
+          <h1>To-Do List VSEVOLODOVA ANNA</h1>
+          <p class="brand-sub">Личный список дел</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button type="button" id="trash-btn" class="icon-btn" aria-label="Корзина">
+          <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
+          <span id="trash-count" class="badge-count" hidden>0</span>
+        </button>
+        <button type="button" id="settings-btn" class="icon-btn" aria-label="Настройки">
+          <svg class="icon" aria-hidden="true"><use href="#i-settings"></use></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="toolbar card" aria-label="Панель управления">
+        <div class="toolbar-left">
+          <label class="select-wrap">
+            <span class="sr-only">Сортировка</span>
+            <select id="sort-select" class="select">
+              <option value="deadline_asc">Срок: сначала ближайшие</option>
+              <option value="deadline_desc">Срок: сначала дальние</option>
+              <option value="created_desc">Новые сначала</option>
+              <option value="created_asc">Старые сначала</option>
+              <option value="title_asc">По названию А–Я</option>
+              <option value="status">По статусу</option>
+              <option value="important">По важности</option>
+            </select>
+          </label>
+          <button type="button" id="filters-toggle" class="btn btn-secondary" aria-expanded="false" aria-controls="filters-panel">
+            <svg class="icon" aria-hidden="true"><use href="#i-filter"></use></svg>
+            <span>Фильтры</span>
+            <span id="filters-count" class="count-pill" hidden>0</span>
+          </button>
+        </div>
+        <button type="button" id="add-task-btn" class="btn btn-primary">
+          <svg class="icon" aria-hidden="true"><use href="#i-plus"></use></svg>
+          <span>Новая задача</span>
+        </button>
+      </section>
+
+      <section id="filters-panel" class="filters card" aria-label="Фильтры задач" hidden>
+        <div class="filter-group">
+          <span class="filter-label">Статус</span>
+          <label class="check-row"><input type="checkbox" name="filter-status" value="new" checked> Новая</label>
+          <label class="check-row"><input type="checkbox" name="filter-status" value="in_progress" checked> В работе</label>
+          <label class="check-row"><input type="checkbox" name="filter-status" value="done" checked> Готово</label>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Важность</span>
+          <label class="check-row"><input type="radio" name="filter-important" value="all" checked> Все</label>
+          <label class="check-row"><input type="radio" name="filter-important" value="important"> Только важные</label>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label" for="filter-deadline">Срок</label>
+          <select id="filter-deadline" class="select select-wide">
+            <option value="all">Все</option>
+            <option value="overdue">Просроченные</option>
+            <option value="today">Сегодня</option>
+            <option value="tomorrow">Завтра</option>
+            <option value="week">На этой неделе</option>
+            <option value="none">Без срока</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Вложения</span>
+          <label class="check-row"><input type="radio" name="filter-attachments" value="all" checked> Все</label>
+          <label class="check-row"><input type="radio" name="filter-attachments" value="with"> С файлами</label>
+        </div>
+        <div class="filter-actions">
+          <button type="button" id="reset-filters" class="btn btn-secondary btn-sm">Сбросить фильтры</button>
+        </div>
+      </section>
+
+      <div id="active-filters" class="active-filters" hidden></div>
+      <div id="stats" class="stats" aria-live="polite"></div>
+      <h2 id="task-list-heading" class="sr-only">Список задач</h2>
+      <section id="task-list" class="task-list" aria-labelledby="task-list-heading"></section>
+    </main>
+  </div>
+
+  <div id="toasts" class="toasts" aria-live="polite" aria-atomic="false"></div>
+
+  <dialog id="task-dialog" class="modal modal-task" aria-labelledby="task-dialog-title">
+    <form id="task-form" class="modal-shell" novalidate>
+      <div class="modal-header">
+        <h2 id="task-dialog-title">Новая задача</h2>
+        <button type="button" class="icon-btn" data-close-dialog="task-dialog" aria-label="Закрыть">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="field">
+          <label for="task-title">Название <span class="required-mark">*</span></label>
+          <input type="text" id="task-title" name="title" maxlength="120" autocomplete="off" placeholder="Что нужно сделать?" aria-required="true">
+          <p id="title-error" class="field-error" role="alert" hidden>Введите название задачи</p>
+        </div>
+
+        <div class="field">
+          <label for="task-description">Описание</label>
+          <textarea id="task-description" name="description" maxlength="2000" rows="3" placeholder="Детали, ссылки, заметки"></textarea>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Срок</span>
+          <div class="preset-row" role="group" aria-label="Быстрый выбор срока">
+            <button type="button" class="preset" data-preset="today">Сегодня</button>
+            <button type="button" class="preset" data-preset="tomorrow">Завтра</button>
+            <button type="button" class="preset" data-preset="month_end">В конце месяца</button>
+            <button type="button" class="preset" data-preset="none">Без срока</button>
+          </div>
+          <div class="date-row">
+            <input type="date" id="task-deadline" class="input-date" aria-label="Срок">
+            <p id="deadline-hint" class="field-hint"></p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="task-status">Статус</label>
+            <select id="task-status" class="select select-wide">
+              <option value="new">Новая</option>
+              <option value="in_progress">В работе</option>
+              <option value="done">Готово</option>
+            </select>
+          </div>
+          <div class="field">
+            <span class="field-label">Важность</span>
+            <label class="important-toggle">
+              <input type="checkbox" id="task-important">
+              <svg class="icon fire-preview" aria-hidden="true"><use href="#i-fire"></use></svg>
+              <span>Важная задача</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="task-result">Результат</label>
+          <textarea id="task-result" name="result" maxlength="2000" rows="3" placeholder="Что сделано или чем завершилась задача"></textarea>
+          <p id="result-hint" class="field-hint"></p>
+          <p id="result-error" class="field-error" role="alert" hidden>Введите результат — без него нельзя перевести задачу в «Готово»</p>
+        </div>
+
+        <section class="modal-section" aria-labelledby="attachments-heading">
+          <div class="section-head">
+            <h3 id="attachments-heading">Файлы</h3>
+            <span id="attachments-count" class="section-count">0 / 10</span>
+          </div>
+          <button type="button" id="dropzone" class="dropzone">
+            <svg class="icon" aria-hidden="true"><use href="#i-paperclip"></use></svg>
+            <span id="dropzone-text">Перетащите файлы сюда или нажмите, чтобы выбрать</span>
+          </button>
+          <input type="file" id="file-input" class="sr-only" multiple>
+          <ul id="attachment-list" class="attachment-list"></ul>
+        </section>
+
+        <section id="comments-section" class="modal-section comments-section" aria-labelledby="comments-heading">
+          <div class="section-head">
+            <h3 id="comments-heading">Комментарии</h3>
+            <span id="comments-count" class="section-count"></span>
+          </div>
+          <ul id="comments-list" class="comments-list"></ul>
+          <div class="comment-form">
+            <textarea id="comment-text" maxlength="1000" rows="2" placeholder="Добавить комментарий…" aria-label="Новый комментарий"></textarea>
+            <button type="button" id="add-comment-btn" class="btn btn-secondary" disabled>Добавить</button>
+          </div>
+          <p id="comments-create-hint" class="field-hint" hidden>Комментарии можно добавить после создания задачи.</p>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-dialog="task-dialog">Отмена</button>
+        <button type="submit" id="task-save-btn" class="btn btn-primary">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="trash-dialog" class="modal modal-trash" aria-labelledby="trash-dialog-title">
+    <div class="modal-shell">
+      <div class="modal-header">
+        <h2 id="trash-dialog-title">Корзина</h2>
+        <button type="button" class="icon-btn" data-close-dialog="trash-dialog" aria-label="Закрыть">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul id="trash-list" class="trash-list"></ul>
+        <div id="trash-empty" class="empty-state compact" hidden>
+          <span class="empty-icon" aria-hidden="true"><svg class="icon"><use href="#i-inbox"></use></svg></span>
+          <h2>Корзина пуста</h2>
+          <p>Удалённые задачи будут храниться здесь 30 дней.</p>
+        </div>
+      </div>
+      <div class="modal-footer modal-footer-between">
+        <button type="button" id="clear-trash-btn" class="btn btn-danger-ghost">Очистить корзину</button>
+        <button type="button" class="btn btn-secondary" data-close-dialog="trash-dialog">Закрыть</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="settings-dialog" class="modal modal-sm" aria-labelledby="settings-dialog-title">
+    <div class="modal-shell">
+      <div class="modal-header">
+        <h2 id="settings-dialog-title">Настройки</h2>
+        <button type="button" class="icon-btn" data-close-dialog="settings-dialog" aria-label="Закрыть">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label class="switch-row">
+          <span class="switch">
+            <input type="checkbox" id="require-result-toggle">
+            <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+          </span>
+          <span class="switch-text">
+            <strong>Запретить перевод в «Готово» без результата</strong>
+            <span>Если включено, при завершении задачи нужно заполнить поле «Результат».</span>
+          </span>
+        </label>
+        <p class="settings-note">Настройка сохраняется автоматически. Все данные хранятся только в этом браузере.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-dialog="settings-dialog">Закрыть</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="result-dialog" class="modal modal-sm" aria-labelledby="result-dialog-title">
+    <div class="modal-shell">
+      <div class="modal-header">
+        <h2 id="result-dialog-title">Укажите результат</h2>
+        <button type="button" class="icon-btn" data-close-dialog="result-dialog" aria-label="Закрыть">
+          <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="result-task-title" id="result-task-title"></p>
+        <div class="field">
+          <label for="result-text">Результат</label>
+          <textarea id="result-text" rows="4" maxlength="2000" placeholder="Опишите, чем завершилась задача"></textarea>
+          <p id="result-dialog-error" class="field-error" role="alert" hidden>Введите результат, чтобы завершить задачу</p>
+          <p class="field-hint">Запрет завершения без результата включён в настройках.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-close-dialog="result-dialog">Отмена</button>
+        <button type="button" id="result-save-btn" class="btn btn-primary">Сохранить и завершить</button>
+      </div>
+    </div>
+  </dialog>
+
+  <noscript>
+    <div class="noscript">Для работы приложения нужен JavaScript.</div>
+  </noscript>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
